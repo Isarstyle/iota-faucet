@@ -3,7 +3,7 @@ $(document).ready(function() {
     var $window = $(window);
     var address = getDataFromForm()
     var socket = io();
-    console.log("Document Ready");
+    //console.log("Document Ready");
     //Attach Eventlistener
     $( "#sendIotaBtn" ).click(function() {
         alert(getDataFromForm());
@@ -15,11 +15,17 @@ $(document).ready(function() {
 
 
     });
-
+    // Whenever the server emits 'balance', show the actual balance
+      socket.on('balance', function (balance) {
+          console.log(balance);
+          // Update total balance
+          $("#iota__balance").html(balance);
+      });
+      socket.on('response', function (errorMsg) {
+          console.log(errorMsg);
+      });
     //GetDataFromForm
     function getDataFromForm(){
         return $("#sendIotaInput").val();
     }
-
-
     });

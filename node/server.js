@@ -30,37 +30,43 @@ var balance = 0;
 var io = require('socket.io')(server);
 io.on('connection',function(client){
         console.log("Client connected...");
-
-        // when the client emits 'new message', this listens and executes
+        //Get the current Account balance
+        getAccountInfo(client);
+        // when the client emits 'sendTransfer', this listens and executes
       client.on('send', function (data) {
+          var errorMsg = ""
           //TODO Check if Adress is ok
         if (iota.valid.isAddress(data)) {
             // Call The sendTransfer(address, value, messageTrytes)
-              sendTransfer(data, 1 , 1);
+              sendTransfer(data, 1 , 1, client);
               // We fetch the latest transactions every 90 seconds
-              getAccountInfo();
               setInterval(getAccountInfo, 90000);
         } else {
             console.log("Address ERROR! No valid Address.");
+            errorMsg = "Address ERROR! No valid Address."
         }
         // we tell the client to execute 'new message'
-        client.broadcast.emit('working', {message: data});
+        client.broadcast.emit('response', {message: errorMsg});
   });
 });
 // Gets the addresses and transactions of an account
 // As well as the current balance
 //  Automatically updates the HTML on the site
 //
-function getAccountInfo() {
+function getAccountInfo(client) {
     // Command to be sent to the IOTA API
     // Gets the latest transfers for the specified seed
     iota.api.getAccountData(seed, function(e, accountData) {
+        if (e){
+          console.log(e)
+        } else {
+            console.log("Account data", accountData);
+            balance = accountData.balance;
 
-        console.log("Account data", accountData);
-        balance = accountData.balance;
+            client.broadcast.emit('balance', {message: balance});
+        }
 
-        // Update total balance
-        $("#iota__balance").html(balance);
+
     })
 }
 
@@ -68,7 +74,7 @@ function getAccountInfo() {
 //  Makes a new transfer for the specified seed
 //  Includes message and value
 //
-function sendTransfer(address, value, messageTrytes) {
+function sendTransfer(address, value, messageTrytes, client) {
     var transfer = [{
         'address': address,
         'value': parseInt(value),
@@ -78,15 +84,15 @@ function sendTransfer(address, value, messageTrytes) {
 
     console.log("Sending Transfer", transfer);
     //console.log(iota);
-    // We send the transfer from this seed, with depth 4 and minWeightMagnitude 18
-    iota.api.sendTransfer(seed, 4, 18, transfer, function(e) {
+    // We send the transfer from this seed, with depth 4 and minWeightMagnitude 15
+    iota.api.sendTransfer(seed, 4, 15, transfer, function(e) {
 
         if (e){
           console.log(e)
         } else {
             console.log("Successfully sent 1 IOTA to " + address)
             balance = balance - value;
-            $("#iota__balance").html(balance);
+            client.broadcast.emit('balance', {message: balance});
         }
     })
 }

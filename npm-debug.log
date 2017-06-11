@@ -1,25 +1,47 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/Users/alexander/.nvm/versions/node/v4.2.6/bin/node',
-1 verbose cli   '/Users/alexander/.nvm/versions/node/v4.2.6/bin/npm',
-1 verbose cli   'stop' ]
-2 info using npm@3.10.8
-3 info using node@v4.2.6
-4 verbose stack Error: missing script: stop
-4 verbose stack     at run (/Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/lib/run-script.js:151:19)
-4 verbose stack     at /Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/lib/run-script.js:61:5
-4 verbose stack     at /Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:356:5
-4 verbose stack     at checkBinReferences_ (/Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:320:45)
-4 verbose stack     at final (/Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:354:3)
-4 verbose stack     at then (/Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:124:5)
-4 verbose stack     at /Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:311:12
-4 verbose stack     at /Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
-4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:380:3)
-5 verbose cwd /Users/alexander/Dev/IOTA/iota-faucet
-6 error Darwin 16.0.0
-7 error argv "/Users/alexander/.nvm/versions/node/v4.2.6/bin/node" "/Users/alexander/.nvm/versions/node/v4.2.6/bin/npm" "stop"
-8 error node v4.2.6
-9 error npm  v3.10.8
-10 error missing script: stop
-11 error If you need help, you may report this error at:
-11 error     <https://github.com/npm/npm/issues>
-12 verbose exit [ 1, true ]
+1 verbose cli [ 'C:\\nodejs\\node.exe',
+1 verbose cli   'C:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'start' ]
+2 info using npm@3.9.5
+3 info using node@v6.2.1
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info lifecycle iota-faucet@0.1.0~prestart: iota-faucet@0.1.0
+6 silly lifecycle iota-faucet@0.1.0~prestart: no script for prestart, continuing
+7 info lifecycle iota-faucet@0.1.0~start: iota-faucet@0.1.0
+8 verbose lifecycle iota-faucet@0.1.0~start: unsafe-perm in lifecycle true
+9 verbose lifecycle iota-faucet@0.1.0~start: PATH: C:\Users\Friedrich\AppData\Roaming\nvm\v6.2.1\node_modules\npm\bin\node-gyp-bin;C:\Meteor\iota-faucet\node_modules\.bin;C:\nodejs;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\ProgramData\Oracle\Java\javapath;C:\ImageMagick;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\TortoiseHg\;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files (x86)\Calibre2\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Users\Friedrich\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\OpenVPN\bin;C:\Program Files (x86)\GtkSharp\2.12\bin;C:\Users\Friedrich\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Microsoft Windows Performance Toolkit\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Git\bin;C:\Program Files\Git\libexec\git-core;C:\Program Files (x86)\Nmap;C:\Users\Friedrich\AppData\Local\.meteor\;C:\Users\Friedrich\AppData\Local\atom\bin;C:\nodejs;C:\nodejs;C:\python27;E:\AndroidDev;E:\AndroidDev\tools;E:\AndroidDev\platform-tools;E:\AndroidDev\gradle-3.1\bin;C:\nodejs\node_modules\node-gyp;C:\nodejs\node_modules\pangyp;C:\rethinkdb;C:\Program Files\MongoDB\Server\3.4\bin;C:\Program Files\Java\jdk1.8.0_111\
+10 verbose lifecycle iota-faucet@0.1.0~start: CWD: C:\Meteor\iota-faucet
+11 silly lifecycle iota-faucet@0.1.0~start: Args: [ '/d /s /c', 'node node/server.js' ]
+12 silly lifecycle iota-faucet@0.1.0~start: Returned: code: 1  signal: null
+13 info lifecycle iota-faucet@0.1.0~start: Failed to exec start script
+14 verbose stack Error: iota-faucet@0.1.0 start: `node node/server.js`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (C:\Users\Friedrich\AppData\Roaming\nvm\v6.2.1\node_modules\npm\lib\utils\lifecycle.js:245:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Users\Friedrich\AppData\Roaming\nvm\v6.2.1\node_modules\npm\lib\utils\spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:852:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+15 verbose pkgid iota-faucet@0.1.0
+16 verbose cwd C:\Meteor\iota-faucet
+17 error Windows_NT 6.3.9600
+18 error argv "C:\\nodejs\\node.exe" "C:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
+19 error node v6.2.1
+20 error npm  v3.9.5
+21 error code ELIFECYCLE
+22 error iota-faucet@0.1.0 start: `node node/server.js`
+22 error Exit status 1
+23 error Failed at the iota-faucet@0.1.0 start script 'node node/server.js'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the iota-faucet package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     node node/server.js
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs iota-faucet
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls iota-faucet
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
