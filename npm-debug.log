@@ -1,0 +1,25 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/alexander/.nvm/versions/node/v4.2.6/bin/node',
+1 verbose cli   '/Users/alexander/.nvm/versions/node/v4.2.6/bin/npm',
+1 verbose cli   'stop' ]
+2 info using npm@3.10.8
+3 info using node@v4.2.6
+4 verbose stack Error: missing script: stop
+4 verbose stack     at run (/Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/lib/run-script.js:151:19)
+4 verbose stack     at /Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/lib/run-script.js:61:5
+4 verbose stack     at /Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:356:5
+4 verbose stack     at checkBinReferences_ (/Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:320:45)
+4 verbose stack     at final (/Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:354:3)
+4 verbose stack     at then (/Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:124:5)
+4 verbose stack     at /Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/read-package-json/read-json.js:311:12
+4 verbose stack     at /Users/alexander/.nvm/versions/node/v4.2.6/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:380:3)
+5 verbose cwd /Users/alexander/Dev/IOTA/iota-faucet
+6 error Darwin 16.0.0
+7 error argv "/Users/alexander/.nvm/versions/node/v4.2.6/bin/node" "/Users/alexander/.nvm/versions/node/v4.2.6/bin/npm" "stop"
+8 error node v4.2.6
+9 error npm  v3.10.8
+10 error missing script: stop
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]

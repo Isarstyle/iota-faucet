@@ -5,12 +5,15 @@ var server = require('http').createServer(app);
 
 var IOTA = require("iota.lib.js");
 //  Instantiate IOTA
-// for Sandbox
 var iota = new IOTA({
-  'provider'  : 'http://sandbox.iotatoken.com/api/v1/',
-  'sandbox'   :  true,
-  'token'     : 'EXAMPLE-TOKEN-HERE'
+    'host': 'http://165.227.128.198',
+    'port': 14265
 });
+// var iota = new IOTA({
+//   'host'  : 'http://165.227.128.198',
+//   'sandbox'   :  true,
+//   'token'     : 'EXAMPLE-TOKEN-HERE'
+// });
 //for Server
 // var iota = new IOTA({
 //        'host': 'http://localhost',
@@ -33,7 +36,10 @@ io.on('connection',function(client){
           //TODO Check if Adress is ok
         if (iota.valid.isAddress(data)) {
             // Call The sendTransfer(address, value, messageTrytes)
-              sendTransfer(data, 1 , 1)
+              sendTransfer(data, 1 , 1);
+              // We fetch the latest transactions every 90 seconds
+              getAccountInfo();
+              setInterval(getAccountInfo, 90000);
         } else {
             console.log("Address ERROR! No valid Address.");
         }
