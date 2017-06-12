@@ -8,9 +8,13 @@ $(document).ready(function() {
         //alert(getDataFromForm());
         //TODO Clean Input Data of unwanted Stuff?
         var address = getDataFromForm()
+        if (address === "") {
+            //empty Address
+            return
+        }
         //Add Response for Iota is Sending
         swal({
-      title: 'is your address correct? ' + address,
+      title: 'is your address correct? ' + address + 'this takes up to 10 minutes!',
       confirmButtonText: 'Confirm Address',
       showLoaderOnConfirm: true,
       preConfirm: function () {
