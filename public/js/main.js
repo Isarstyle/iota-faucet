@@ -6,7 +6,7 @@ $(document).ready(function() {
     //console.log("Document Ready");
     //Attach Eventlistener
     $( "#sendIotaBtn" ).click(function() {
-        alert(getDataFromForm());
+        //alert(getDataFromForm());
         console.log(getDataFromForm());
         //TODO Clean Input Data of unwanted Stuff?
         // Socket events
