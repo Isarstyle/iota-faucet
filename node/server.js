@@ -11,12 +11,12 @@ var iota = new IOTA({
 });
 var json = require('./seed.json');
 var seed = json.seed;
-var client;
-var balance;
+var client; // global
+var balance; // global
 
 // Gets the addresses and transactions of an account
 // Get the current Account balance
-function getAccountInfo(client) {
+function getAccountInfo() {
     // Command to be sent to the IOTA API
     // Gets the latest transfers for the specified seed
     iota.api.getAccountData(seed, function(e, accountData) {
@@ -24,7 +24,7 @@ function getAccountInfo(client) {
           console.log(e)
         } else {
             console.log("Account Balance: ", accountData.balance);
-            var balance = accountData.balance
+            balance = accountData.balance
             client.broadcast.emit('balance', balance);
         }
     })
@@ -37,8 +37,8 @@ io.on('connection',function(clientSocket){
         client = clientSocket
         //get the inital balance
         getAccountInfo(client)
-    // We fetch the latest transactions every 10 minutes
-        setInterval(function(){getAccountInfo(client)}, 600000);
+    // We fetch the latest transactions every 1 minute
+        setInterval(function(){getAccountInfo()}, 60000);
     // when the client emits 'sendTransfer', this listens and executes
       client.on('send', function (address) {
           var errorMsg = ""
