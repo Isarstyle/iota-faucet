@@ -12,6 +12,7 @@ var iota = new IOTA({
 var json = require('./seed.json');
 var seed = json.seed;
 var client;
+var balance;
 
 // Gets the addresses and transactions of an account
 // Get the current Account balance
