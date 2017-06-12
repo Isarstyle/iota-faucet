@@ -12,11 +12,11 @@ var iota = new IOTA({
 var json = require('./seed.json');
 var seed = json.seed;
 var balance = 0;
+setInterval(getAccountInfo, 600000);
 
 var io = require('socket.io')(server);
 io.on('connection',function(client){
         console.log("Client connected...");
-        console.log(seed);
         //Get the current Account balance
         getAccountInfo();
         // when the client emits 'sendTransfer', this listens and executes
@@ -30,8 +30,7 @@ io.on('connection',function(client){
             console.log("Address ERROR! No valid Address.");
             errorMsg = "Address ERROR! No valid Address."
         }
-        // We fetch the latest transactions every 90 seconds
-        setInterval(getAccountInfo, 90000);
+        // We fetch the latest transactions every 10 minutes
         client.broadcast.emit('response', {message: errorMsg});
   });
 
