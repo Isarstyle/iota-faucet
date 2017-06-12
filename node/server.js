@@ -24,7 +24,7 @@ function getAccountInfo(client) {
         } else {
             console.log("Account Balance: ", accountData.balance);
             var balance = accountData.balance
-            client.broadcast.emit('balance', {balance});
+            client.broadcast.emit('balance', balance);
         }
     })
 }
@@ -67,7 +67,7 @@ io.on('connection',function(clientSocket){
             console.log("Address ERROR! No valid Address.");
             errorMsg = "Address ERROR! No valid Address."
         }
-        client.broadcast.emit('response', {errorMsg});
+        client.broadcast.emit('response', errorMsg);
     });
 });
 server.listen(80, '::');
