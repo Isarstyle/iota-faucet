@@ -9,27 +9,14 @@ var iota = new IOTA({
     'host': 'http://165.227.128.198',
     'port': 14265
 });
-// var iota = new IOTA({
-//   'host'  : 'http://165.227.128.198',
-//   'sandbox'   :  true,
-//   'token'     : 'EXAMPLE-TOKEN-HERE'
-// });
-//for Server
-// var iota = new IOTA({
-//        'host': 'http://localhost',
-//        'port': 14265
-//    });
-// we have a bank - so seed is static and secret!
-//TODO Insert Seed to go live
-var seed = "";
+var json = require('./seed.json');
+var seed = json.seed;
 var balance = 0;
-
-
-
 
 var io = require('socket.io')(server);
 io.on('connection',function(client){
         console.log("Client connected...");
+        console.log(seed);
         //Get the current Account balance
         getAccountInfo(client);
         // when the client emits 'sendTransfer', this listens and executes
@@ -46,6 +33,7 @@ io.on('connection',function(client){
             errorMsg = "Address ERROR! No valid Address."
         }
         // we tell the client to execute 'new message'
+        getAccountInfo(client);
         client.broadcast.emit('response', {message: errorMsg});
   });
 });
@@ -62,11 +50,8 @@ function getAccountInfo(client) {
         } else {
             console.log("Account data", accountData);
             balance = accountData.balance;
-
             client.broadcast.emit('balance', {message: balance});
         }
-
-
     })
 }
 
@@ -91,8 +76,6 @@ function sendTransfer(address, value, messageTrytes, client) {
           console.log(e)
         } else {
             console.log("Successfully sent 1 IOTA to " + address)
-            balance = balance - value;
-            client.broadcast.emit('balance', {message: balance});
         }
     })
 }
