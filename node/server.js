@@ -33,6 +33,8 @@ io.on('connection',function(clientSocket){
         console.log("Client connected...");
         //set the client connection to client var
         client = clientSocket
+        //get the inital balance
+        getAccountInfo(client)
         setInterval(function(){getAccountInfo(client)}, 600000);
     // when the client emits 'sendTransfer', this listens and executes
       client.on('send', function (address) {
