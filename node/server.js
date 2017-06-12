@@ -58,16 +58,18 @@ io.on('connection',function(clientSocket){
                       if (e){
                         console.log(e)
                         errorMsg = e
+                        client.broadcast.emit('response', errorMsg);
                       } else {
                         console.log("Successfully sent 1 IOTA to " + address)
-                        errorMsg = "Successfully sent 1 IOTA"
+                        errorMsg = "Successfully sent 1 IOTA " + address
+                        client.broadcast.emit('response', errorMsg);
                       }
                   })
         } else {
             console.log("Address ERROR! No valid Address.");
             errorMsg = "Address ERROR! No valid Address."
+            client.broadcast.emit('response', errorMsg);
         }
-        client.broadcast.emit('response', errorMsg);
     });
 });
 server.listen(80, '::');

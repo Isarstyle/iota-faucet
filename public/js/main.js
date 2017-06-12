@@ -6,9 +6,8 @@ $(document).ready(function() {
         console.log(errorMsg);
         swal({
           type: 'success',
-          title: 'IOTA successfully sent!',
-          text: errorMsg,
-          html: 'Check your Wallet'
+          title: 'Transfermessage!',
+          text: errorMsg
         })
 
     })
@@ -26,7 +25,7 @@ $(document).ready(function() {
     swal({
       type: 'question',
       title: 'Please confirm your address!',
-      text: address + ' this may take up to 10 minutes!',
+      text: address + '  | this may take up to 10 minutes until you can see it in your wallet!',
       confirmButtonText: 'Confirm Address',
       showLoaderOnConfirm: true,
       preConfirm: function () {
