@@ -2,6 +2,8 @@ var express = require('express');
 var app = require('express')();
 app.use(express.static('public'));
 var server = require('http').createServer(app);
+server.listen(80, '::');
+console.log("server at http://localhost:80");
 
 var IOTA = require("iota.lib.js");
 //  Instantiate IOTA
@@ -73,5 +75,3 @@ io.on('connection',function(clientSocket){
         }
     });
 });
-server.listen(80, '::');
-console.log("server at http://localhost:80");
