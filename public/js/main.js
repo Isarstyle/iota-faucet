@@ -45,7 +45,7 @@ $(document).ready(function() {
       socket.on('balance', function (balance) {
           console.log(balance);
           // Update total balance
-          $("#iota__balance").html(balance);
+          $("#iota__balance").html(balance.toString());
       });
 
     //GetDataFromForm

@@ -23,7 +23,7 @@ function getAccountInfo(client) {
           console.log(e)
         } else {
             console.log("Account Balance: ", accountData.balance);
-            client.broadcast.emit('balance', {message: accountData.balance});
+            client.broadcast.emit('balance', {accountData.balance});
         }
     })
 }
@@ -55,10 +55,10 @@ io.on('connection',function(clientSocket){
                   iota.api.sendTransfer(seed, 4, 15, transfer, function(e) {
                       if (e){
                         console.log(e)
-                        client.broadcast.emit('response', {message: e});
+                        client.broadcast.emit('response', {e});
                       } else {
                         console.log("Successfully sent 1 IOTA to " + address)
-                        client.broadcast.emit('response', {message: "Successfully sent 1 IOTA"});
+                        client.broadcast.emit('response', {"Successfully sent 1 IOTA"});
                       }
                   })
         } else {
@@ -66,7 +66,7 @@ io.on('connection',function(clientSocket){
             errorMsg = "Address ERROR! No valid Address."
         }
         // We fetch the latest transactions every 10 minutes
-        client.broadcast.emit('response', {message: errorMsg});
+        client.broadcast.emit('response', {errorMsg});
     });
 });
 server.listen(80, '::');
