@@ -31,7 +31,7 @@ io.on('connection',function(client){
             errorMsg = "Address ERROR! No valid Address."
         }
         // We fetch the latest transactions every 90 seconds
-        setInterval(getAccountInfo(), 90000);
+        setInterval(getAccountInfo, 90000);
         client.broadcast.emit('response', {message: errorMsg});
   });
 
@@ -74,7 +74,7 @@ io.on('connection',function(client){
             client.broadcast.emit('response', {message: e});
           } else {
             console.log("Successfully sent 1 IOTA to " + address)
-            client.broadcast.emit('response', {message: "Successfully sent 1 IOTA to " + address});
+            client.broadcast.emit('response', {message: "Successfully sent 1 IOTA"});
           }
       })
   }
