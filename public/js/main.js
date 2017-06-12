@@ -14,7 +14,7 @@ $(document).ready(function() {
         }
         //Add Response for Iota is Sending
         swal({
-      title: 'is your address correct? ' + address + 'this takes up to 10 minutes!',
+      title: 'Please confirm your address ! ' + address + ' this may take up to 10 minutes!',
       confirmButtonText: 'Confirm Address',
       showLoaderOnConfirm: true,
       preConfirm: function () {
