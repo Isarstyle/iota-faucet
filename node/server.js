@@ -37,8 +37,10 @@ function getAccountInfo() {
             balance = accountData.balance
             var balanceObj = {balance: accountData.balance};
             var jsonbalance = JSON.stringify(balanceObj);
-            fs.writeFile(path+'\\public\\balancecache.json', jsonbalance, 'utf8');
-        }
+            fs.writeFile(path+'\\public\\balancecache.json', jsonbalance, 'utf8', (err) => {
+	if (err) throw err;}
+)
+}
     })
 }
 
