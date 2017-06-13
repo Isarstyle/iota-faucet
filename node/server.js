@@ -41,7 +41,7 @@ function getAccountInfo() {
 	if (err) throw err;}
 )
 }
-    })
+})
 }
 
 var io = require('socket.io')(server);
