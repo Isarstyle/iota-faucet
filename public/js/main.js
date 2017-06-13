@@ -3,19 +3,10 @@ $(document).ready(function() {
     var $window = $(window);
     var socket = io();
 
+    var iota = new IOTA({'host': 'http://165.227.128.198', 'port': 14265});
     //set the initial Balance from Cache, update every 10 seconds from file
     updateSupply()
     setInterval(function(){updateSupply()}, 10000);
-    
-    socket.on('response', function (errorMsg) {
-        console.log(errorMsg);
-        swal({
-          type: 'success',
-          title: 'Transfermessage!',
-          text: errorMsg
-        })
-
-    })
     //console.log("Document Ready");
     //Attach Eventlistener
     $( "#sendIotaBtn" ).click(function() {
@@ -30,35 +21,43 @@ $(document).ready(function() {
     swal({
       type: 'question',
       title: 'Please confirm your address!',
-      text: address + '  | this may take up to 10 minutes until you can see it in your wallet!',
+      text: address + '  | this may take up to 10 minutes, please wait!',
       confirmButtonText: 'Confirm Address',
       showLoaderOnConfirm: true,
       preConfirm: function () {
+           return new Promise(function (resolve, reject) {
           // Send event
-          socket.emit('send', getDataFromForm());
-          //just wait a minute
-          return new Promise(function (resolve) {
-              setTimeout(function() {
-                  resolve()
-              }, 60000)
-          })
+          socket.emit('sendTransfer', getDataFromForm(), function (trytes) {
+              console.log("Client POW Start");
+              if (trytes === "Address ERROR!") {
+                   reject("Address ERROR!")
+              }
+              //  console.log(trytes);
+                  iota.api.sendTrytes(trytes, 4, 15, function(error){
+                      if (error) {
+                          console.log(error)
+                          reject(error)
+                      } else {
+                          console.log("IOTA POW Done");
+                          resolve()
+                      }
+             });
+          });
+         })
       },
       allowOutsideClick: false
-    })
+  }).then(function () {
+      swal({
+        type: 'success',
+        title: 'Transfer Successful!',
+        text: "Check your Wallet!"
+      })
     });
-    // Whenever the server emits 'balance', update the balance
-      socket.on('balance', function (balance) {
-        //   console.log(balance);
-          // Update total balance
-          $("#iota__balance").html(balance.toString());
-      });
-
+});
     //GetDataFromForm
     function getDataFromForm(){
         return $("#sendIotaInput").val();
     }
-
-
     //updateSupply
     function updateSupply(){
         $.getJSON( "./balancecache.json", function( data ) {

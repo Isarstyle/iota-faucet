@@ -1,10 +1,20 @@
 # iota-faucet
-Get 1 free IOTA
+## Send 1 free IOTA
 
-git clone this repo
-cd iota-faucet
+# Installation
 
-npm install
-npm start
+1.git clone this repo
+2.cd iota-faucet
+3.Add your Seed to node\seed.json
 
-http://localhost:3000
+```sh
+$ npm install
+```
+
+# Usage
+```sh
+$ npm start
+```
+go to http://localhost/
+
+# Start sharing Iota!

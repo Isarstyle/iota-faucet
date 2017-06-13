@@ -17,7 +17,6 @@ var IOTA = require("iota.lib.js");
 var iota = new IOTA({'host': 'http://165.227.128.198', 'port': 14265});
 var seedJson = require('./seed.json');
 var seed = seedJson.seed;
-var client; // global
 var balanceJson = require('../public/balancecache.json');
 var balance = balanceJson.balance; // global
 
@@ -55,12 +54,11 @@ function getAccountInfo() {
 }
 
 var io = require('socket.io')(server);
-io.on('connection', function(clientSocket) {
+io.on('connection', function(client) {
     console.log("Client connected...");
     //set the client connection to client var
-    client = clientSocket
     // when the client emits 'sendTransfer', this listens and executes
-    client.on('send', function(address) {
+    client.on('sendTransfer', function(address, callbackFn) {
         var errorMsg = ""
         // Check if Address is ok
         if (iota.valid.isAddress(address)) {
@@ -77,21 +75,33 @@ io.on('connection', function(clientSocket) {
             console.log("Sending 1 Iota to", address);
             //console.log(iota);
             // We send the transfer from this seed, with depth 4 and minWeightMagnitude 15
-            iota.api.sendTransfer(seed, 4, 15, transfer, function(e) {
-                if (e) {
-                    console.log(e)
-                    errorMsg = e
-                    client.broadcast.emit('response', errorMsg);
+            // iota.api.sendTransfer(seed, 4, 15, transfer, function(e) {
+            //     if (e) {
+            //         console.log(e)
+            //         errorMsg = e
+            //         client.broadcast.emit('response', errorMsg);
+            //     } else {
+            //         console.log("Successfully sent 1 IOTA to " + address)
+            //         errorMsg = "Successfully sent 1 IOTA " + address
+            //         client.broadcast.emit('response', errorMsg);
+            //     }
+            // })
+
+            iota.api.prepareTransfers(seed, transfer, function(error, trytes) {
+                // console.log("prepareTransfers");
+                if (error) {
+                    console.log("ERROR");
+                    console.log(error);
                 } else {
-                    console.log("Successfully sent 1 IOTA to " + address)
-                    errorMsg = "Successfully sent 1 IOTA " + address
-                    client.broadcast.emit('response', errorMsg);
+                    // console.log(trytes);
+                    return callbackFn(trytes)
                 }
+                //get the trytes to client and do the sendTrytes / POW at client YES
             })
+
         } else {
-            console.log("Address ERROR! No valid Address.");
-            errorMsg = "Address ERROR! No valid Address."
-            client.broadcast.emit('response', errorMsg);
+            console.log("Address ERROR: " + address);
+            return callbackFn("Address ERROR!")
         }
     });
 });
