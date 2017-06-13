@@ -7,11 +7,12 @@
     "start": "node node/server.js"
   },
   "dependencies": {
-    "body-parser": "",
-    "express": "",
-    "iota.lib.js": "",
-    "path": "^0.12.7",
-    "socket.io": "^2.0.2"
+    "express": "*",
+    "fs": "0.0.1-security",
+    "iota.lib.js": "*",
+    "moment": "^2.18.1",
+    "path": "*",
+    "socket.io": "*"
   },
   "private": true
 }

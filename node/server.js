@@ -1,9 +1,14 @@
+var fs = require('fs');
+var moment = require('moment');
 var express = require('express');
 var app = require('express')();
 app.use(express.static('public'));
 var server = require('http').createServer(app);
 server.listen(80, '::');
 console.log("server at http://localhost:80");
+
+// We fetch the latest transactions every 1 minute
+    setInterval(function(){getAccountInfo()}, 60000);
 
 var IOTA = require("iota.lib.js");
 //  Instantiate IOTA
@@ -19,15 +24,20 @@ var balance; // global
 // Gets the addresses and transactions of an account
 // Get the current Account balance
 function getAccountInfo() {
+    var path = process.cwd();
+    console.log("Get the Balance: " + moment().format());
+    // console.log(path);
     // Command to be sent to the IOTA API
     // Gets the latest transfers for the specified seed
     iota.api.getAccountData(seed, function(e, accountData) {
         if (e){
           console.log(e)
         } else {
-            console.log("Account Balance: ", accountData.balance);
+            console.log("Write Account Balance to file: ", accountData.balance);
             balance = accountData.balance
-            client.broadcast.emit('balance', balance);
+            var balanceObj = {balance: accountData.balance};
+            var jsonbalance = JSON.stringify(balanceObj);
+            fs.writeFile(path+'\\public\\balancecache.json', jsonbalance, 'utf8');
         }
     })
 }
@@ -37,10 +47,6 @@ io.on('connection',function(clientSocket){
         console.log("Client connected...");
         //set the client connection to client var
         client = clientSocket
-        //get the inital balance
-        getAccountInfo(client)
-    // We fetch the latest transactions every 1 minute
-        setInterval(function(){getAccountInfo()}, 60000);
     // when the client emits 'sendTransfer', this listens and executes
       client.on('send', function (address) {
           var errorMsg = ""

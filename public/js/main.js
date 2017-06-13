@@ -2,6 +2,12 @@ $(document).ready(function() {
     // Initialize variables
     var $window = $(window);
     var socket = io();
+    //set the initial Balance from Cache, maybe update later
+     $.getJSON( "./balancecache.json", function( data ) {
+         var balance = data.balance;
+         $("#iota__balance").html(balance.toString());
+     });
+
     socket.on('response', function (errorMsg) {
         console.log(errorMsg);
         swal({
@@ -41,7 +47,7 @@ $(document).ready(function() {
       allowOutsideClick: false
     })
     });
-    // Whenever the server emits 'balance', show the actual balance
+    // Whenever the server emits 'balance', update the balance
       socket.on('balance', function (balance) {
         //   console.log(balance);
           // Update total balance
