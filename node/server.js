@@ -67,12 +67,12 @@ io.on('connection', function(client) {
             var transfer = [
                 {
                     'address': address,
-                    'value': parseInt(1),
-                    'message': "ONEIOTAFORFREE",
-                    'tag': "ONEIOTAFORFREE"
+                    'value': parseInt(9),
+                    'message': "NINEIOTAFORFREE",
+                    'tag': "NINEIOTAFORFREE"
                 }
             ]
-            console.log("Sending 1 Iota to", address);
+            console.log("Sending 9 Iota to", address);
             //console.log(iota);
             // We send the transfer from this seed, with depth 4 and minWeightMagnitude 15
             // iota.api.sendTransfer(seed, 4, 15, transfer, function(e) {

@@ -3,7 +3,7 @@
 
 ## About
 
-send 1 IOTA to any Address, built with NodeJs & Express
+send 9 IOTA to any Address, built with NodeJs & Express
 
 # Installation
 
