@@ -2,12 +2,11 @@ $(document).ready(function() {
     // Initialize variables
     var $window = $(window);
     var socket = io();
-    //set the initial Balance from Cache, maybe update later
-     $.getJSON( "./balancecache.json", function( data ) {
-         var balance = data.balance;
-         $("#iota__balance").html(balance.toString());
-     });
 
+    //set the initial Balance from Cache, update every 10 seconds from file
+    updateSupply()
+    setInterval(function(){updateSupply()}, 10000);
+    
     socket.on('response', function (errorMsg) {
         console.log(errorMsg);
         swal({
@@ -58,4 +57,14 @@ $(document).ready(function() {
     function getDataFromForm(){
         return $("#sendIotaInput").val();
     }
-    });
+
+
+    //updateSupply
+    function updateSupply(){
+        $.getJSON( "./balancecache.json", function( data ) {
+            var balance = data.balance;
+            $("#iota__balance").html(balance.toString());
+        });
+    }
+
+});
