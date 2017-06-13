@@ -7,10 +7,10 @@ var server = require('http').createServer(app);
 server.listen(80, '::');
 console.log("server at http://localhost:80");
 
-// We fetch the latest transactions every 1 minute
+// We fetch the latest transactions every 100 minutes
 setInterval(function() {
     getAccountInfo()
-}, 60000);
+}, 6000000);
 
 var IOTA = require("iota.lib.js");
 //  Instantiate IOTA
@@ -42,7 +42,8 @@ function getAccountInfo() {
                     balance: accountData.balance
                 };
                 var jsonbalance = JSON.stringify(balanceObj);
-                fs.writeFile(path + '\\public\\balancecache.json', jsonbalance, 'utf8', (err) => {
+                console.log(path + '\\public\\balancecache.json');
+                fs.writeFile(path + '/public/balancecache.json', jsonbalance, 'utf8', (err) => {
                     if (err)
                         throw err;
                     }
