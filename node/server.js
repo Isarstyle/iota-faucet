@@ -10,11 +10,11 @@ console.log("server at http://localhost:80");
 // We fetch the latest transactions every 1 minute
 setInterval(function() {
     getAccountInfo()
-}, 60000);
+}, 10000);
 
 var IOTA = require("iota.lib.js");
 //  Instantiate IOTA
-var iota = new IOTA({'host': 'http://165.227.128.198', 'port': 14265});
+var iota = new IOTA({'host': 'http://iota.bitfinex.com', 'port': 80});
 var seedJson = require('./seed.json');
 var seed = seedJson.seed;
 var balanceJson = require('../public/balancecache.json');
@@ -25,7 +25,8 @@ var balance = balanceJson.balance; // global
 function getAccountInfo() {
     var path = process.cwd();
     console.log("Get the Balance: " + moment().format());
-    // console.log(path);
+    console.log(path);
+    console.log(iota.api);
     // Command to be sent to the IOTA API
     // Gets the latest transfers for the specified seed
     iota.api.getAccountData(seed, function(e, accountData) {
@@ -68,7 +69,7 @@ io.on('connection', function(client) {
                 {
                     'address': address,
                     'value': parseInt(1),
-                    'message': "ONEIOTAFORFREE",
+                    'message': "ONEIOTAFORFREE999FEEDMYFRIENDSEU999DONATEIFYOULIKEIT",
                     'tag': "ONEIOTAFORFREE"
                 }
             ]

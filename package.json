@@ -11,6 +11,7 @@
     "fs": "0.0.1-security",
     "iota.lib.js": "*",
     "moment": "^2.18.1",
+    "nedb": "^1.8.0",
     "path": "*",
     "socket.io": "*"
   },
