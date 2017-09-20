@@ -1,5 +1,6 @@
 var fs = require('fs');
 var moment = require('moment');
+var Datastore = require('nedb');
 var express = require('express');
 var app = require('express')();
 app.use(express.static('public'));
@@ -13,20 +14,23 @@ setInterval(function() {
 }, 10000);
 
 var IOTA = require("iota.lib.js");
+var db = new Datastore({ filename: './datastore.json', autoload: true });
+
 //  Instantiate IOTA
 var iota = new IOTA({'host': 'http://iota.bitfinex.com', 'port': 80});
 var seedJson = require('./seed.json');
 var seed = seedJson.seed;
 var balanceJson = require('../public/balancecache.json');
-var balance = balanceJson.balance; // global
+var balance = balanceJson.balance;
+ // global
 
 // Gets the addresses and transactions of an account
 // Get the current Account balance
 function getAccountInfo() {
     var path = process.cwd();
     console.log("Get the Balance: " + moment().format());
-    console.log(path);
-    console.log(iota.api);
+    //console.log(path);
+    //console.log(iota.api);
     // Command to be sent to the IOTA API
     // Gets the latest transfers for the specified seed
     iota.api.getAccountData(seed, function(e, accountData) {
