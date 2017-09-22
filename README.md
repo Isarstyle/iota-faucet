@@ -11,6 +11,8 @@ send 9 IOTA to any Address, built with NodeJs & Express
 - `Step 2` cd iota-faucet
 - `Step 3` Add your Seed to node\seed.json
 
+Install nodejs Version >= 8.0.0
+
 ```sh
 $ npm install
 ```

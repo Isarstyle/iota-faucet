@@ -21,8 +21,9 @@ setInterval(function() {
 var IOTA = require("iota.lib.js");
 var db = new Datastore({ filename: path + '\\node\\datastore.json', autoload: true });
 
-//  Instantiate IOTA
-var iota = new IOTA({'host': 'http://iota.bitfinex.com', 'port': 80});
+//  Instantiate IOTA!
+var iota = new IOTA({'host': 'http://165.227.128.198', 'port': 14265});
+
 var seedJson = require('./seed.json');
 var seed = seedJson.seed;
 var balanceJson = require('../public/balancecache.json');
