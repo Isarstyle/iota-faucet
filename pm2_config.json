@@ -1,0 +1,9 @@
+{
+  "apps" : [{
+    "name"        : "iota-faucet",
+    "script"      : "./node/server.js",
+    "watch"       : true,
+    "exec_interpreter" : "node",
+    "exec_mode"        : "fork",
+  }]
+}
